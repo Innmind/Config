@@ -1,0 +1,38 @@
+{
+    "name": "innmind/config",
+    "type": "library",
+    "description": "Config schema validator",
+    "keywords": ["config", "validator"],
+    "homepage": "http://github.com/Innmind/Config",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Baptiste Langlade",
+            "email": "langlade.baptiste@gmail.com"
+        }
+    ],
+    "support": {
+        "issues": "http://github.com/Innmind/Config/issues"
+    },
+    "require": {
+        "php": "~7.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Innmind\\Config\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\Innmind\\Config\\": "tests/",
+            "Fixture\\Innmind\\Config\\": "fixtures/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~6.0",
+        "giorgiosironi/eris": "^0.9.0"
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit --colors=always"
+    }
+}
