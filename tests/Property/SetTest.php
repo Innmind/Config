@@ -83,6 +83,7 @@ class SetTest extends TestCase
             ['set<int>+', null],
             ['set<int>+', []],
             ['set<int>+', Immutable\Set::of('int')],
+            ['set<int>', Immutable\Set::of('string')],
         ];
     }
 }

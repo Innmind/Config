@@ -83,6 +83,7 @@ class StreamTest extends TestCase
             ['stream<int>+', null],
             ['stream<int>+', []],
             ['stream<int>+', Immutable\Stream::of('int')],
+            ['stream<int>', Immutable\Stream::of('string')],
         ];
     }
 }
