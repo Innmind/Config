@@ -38,7 +38,10 @@ final class Map implements Structure
 
         foreach ($schema as $key => $value) {
             if (is_array($value)) {
-                $structuresMap = $structuresMap->put($key, $structures->build($value));
+                $structuresMap = $structuresMap->put(
+                    $key,
+                    $structures->build($value, $properties)
+                );
 
                 continue;
             }
@@ -47,7 +50,13 @@ final class Map implements Structure
                 throw new SchemaNotParseable((string) $key);
             }
 
-            $propertiesMap = $propertiesMap->put($key, $properties->build(Str::of($value)));
+            $propertiesMap = $propertiesMap->put(
+                $key,
+                $properties->build(
+                    Str::of($value),
+                    $properties
+                )
+            );
         }
 
         return new self($structuresMap, $propertiesMap);

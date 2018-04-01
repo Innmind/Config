@@ -70,7 +70,7 @@ final class Prototype implements Structure
             }
 
             if (is_array($value)) {
-                $prototype = $structures->build($value);
+                $prototype = $structures->build($value, $properties);
 
                 continue;
             }
@@ -87,7 +87,7 @@ final class Prototype implements Structure
         return new self(
             $prototype,
             $prototypeKey,
-            $structures->build($schema),
+            $structures->build($schema, $properties),
             array_keys($schema)
         );
     }

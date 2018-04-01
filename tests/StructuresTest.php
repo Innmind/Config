@@ -21,7 +21,7 @@ class StructuresTest extends TestCase
      */
     public function testBuild($schema, $expected)
     {
-        $structure = (new Structures)->build($schema);
+        $structure = (new Structures)->build($schema, new Properties);
 
         $this->assertInstanceOf($expected, $structure);
     }
@@ -43,25 +43,16 @@ class StructuresTest extends TestCase
         $this->expectException(DomainException::class);
         $this->expectExceptionMessage('stdClass');
 
-        new Structures(null, 'stdClass');
+        new Structures('stdClass');
     }
 
     public function testDefaultsNotLoadedWhenSpecifyingStructures()
     {
-        $structures = new Structures(null, Structure\Prototype::class);
+        $structures = new Structures(Structure\Prototype::class);
 
         $this->expectException(SchemaNotParseable::class);
 
-        $structures->build(['foo' => 'int']);
-    }
-
-    public function testAllowToSpecifyProperties()
-    {
-        $structures = new Structures(new Properties(Property\Sequence::class));
-
-        $this->expectException(SchemaNotParseable::class);
-
-        $structures->build(['foo' => 'int']);
+        $structures->build(['foo' => 'int'], new Properties);
     }
 
     public function schemas(): array

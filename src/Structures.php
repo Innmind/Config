@@ -15,12 +15,10 @@ use Innmind\Immutable\{
 final class Structures
 {
     private static $defaults;
-    private $properties;
     private $structures;
 
-    public function __construct(Properties $properties = null, string ...$structures)
+    public function __construct(string ...$structures)
     {
-        $this->properties = $properties ?? new Properties;
         $structures = Stream::of('string', ...$structures);
 
         if ($structures->size() === 0) {
@@ -38,11 +36,11 @@ final class Structures
         $this->structures = $structures;
     }
 
-    public function build(array $schema): Structure
+    public function build(array $schema, Properties $properties): Structure
     {
         foreach ($this->structures as $structure) {
             try {
-                return [$structure, 'build']($schema, $this, $this->properties);
+                return [$structure, 'build']($schema, $this, $properties);
             } catch (SchemaNotParseable $e) {
                 //pass
             }
