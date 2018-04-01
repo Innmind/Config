@@ -100,7 +100,7 @@ final class Prototype implements Structure
             $prototypeKey,
             $structures->build($schema, $properties),
             array_keys($schema),
-            (string) Str::of($key)->substring(-1) === '+'
+            (string) Str::of($keyToRemove)->substring(-1) === '+'
         );
     }
 
