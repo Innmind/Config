@@ -64,13 +64,21 @@ final class Prototype implements Structure
             $keyToRemove = $key;
 
             if (is_string($value)) {
-                $prototype = $properties->build(Str::of($value));
+                try {
+                    $prototype = $properties->build(Str::of($value));
+                } catch (SchemaNotParseable $e) {
+                    throw new SchemaNotParseable($key, 0, $e);
+                }
 
                 continue;
             }
 
             if (is_array($value)) {
-                $prototype = $structures->build($value, $properties);
+                try {
+                    $prototype = $structures->build($value, $properties);
+                } catch (SchemaNotParseable $e) {
+                    throw new SchemaNotParseable($key, 0, $e);
+                }
 
                 continue;
             }

@@ -46,7 +46,7 @@ final class Structures
             }
         }
 
-        throw new SchemaNotParseable;
+        throw new SchemaNotParseable('', 0, $e ?? null);
     }
 
     /**

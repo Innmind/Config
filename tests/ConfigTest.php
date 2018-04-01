@@ -47,4 +47,15 @@ class ConfigTest extends TestCase
 
         $this->assertInstanceOf(Structure\Prototype::class, $structure);
     }
+
+    public function testBuildPathToTheElementNotParseable()
+    {
+        $schema = Yaml::parseFile('schema.yml');
+        $schema['prototype<string>']['identity']['property'] = 'uuid';
+
+        $this->expectException(SchemaNotParseable::class);
+        $this->expectExceptionMessage('prototype<string>.identity.property.uuid');
+
+        (new Config)->build($schema);
+    }
 }

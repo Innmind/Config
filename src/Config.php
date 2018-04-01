@@ -3,6 +3,8 @@ declare(strict_types = 1);
 
 namespace Innmind\Config;
 
+use Innmind\Config\Exception\SchemaNotParseable;
+
 final class Config
 {
     private $structures;
@@ -18,6 +20,10 @@ final class Config
 
     public function build(array $schema): Structure
     {
-        return $this->structures->build($schema, $this->properties);
+        try {
+            return $this->structures->build($schema, $this->properties);
+        } catch (SchemaNotParseable $e) {
+            SchemaNotParseable::rethrow($e);
+        }
     }
 }
