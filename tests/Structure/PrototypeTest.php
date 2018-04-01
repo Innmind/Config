@@ -199,4 +199,11 @@ class PrototypeTest extends TestCase
         $this->assertSame('foo', $result->get('bar'));
         $this->assertSame(44.44, $result->get(44));
     }
+
+    public function testThrowWhenNoValueButOneRequired()
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        Prototype::build(['prototype<int>+' => 'bool'], new Structures, new Properties)->process([]);
+    }
 }

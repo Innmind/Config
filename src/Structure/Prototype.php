@@ -20,11 +20,12 @@ use Innmind\Immutable\{
 
 final class Prototype implements Structure
 {
-    private const PATTERN = '~^prototype<(?<type>(int|string|scalar))>$~';
+    private const PATTERN = '~^prototype<(?<type>(int|string|scalar))>\+?$~';
     private $prototype;
     private $prototypeKey;
     private $structure;
     private $structureKeys;
+    private $requiresValue;
 
     /**
      * @param Property\Structure $prototype
@@ -33,12 +34,14 @@ final class Prototype implements Structure
         $prototype,
         Property $prototypeKey,
         Structure $structure,
-        array $structureKeys
+        array $structureKeys,
+        bool $requiresValue
     ) {
         $this->prototype = $prototype;
         $this->prototypeKey = $prototypeKey;
         $this->structure = $structure;
         $this->structureKeys = array_flip($structureKeys);
+        $this->requiresValue = $requiresValue;
     }
 
     public static function build(
@@ -96,7 +99,8 @@ final class Prototype implements Structure
             $prototype,
             $prototypeKey,
             $structures->build($schema, $properties),
-            array_keys($schema)
+            array_keys($schema),
+            (string) Str::of($key)->substring(-1) === '+'
         );
     }
 
@@ -117,6 +121,10 @@ final class Prototype implements Structure
             } catch (InvalidArgumentException $e) {
                 throw new InvalidArgumentException((string) $key, 0, $e);
             }
+        }
+
+        if ($this->requiresValue && $map->size() === 0) {
+            throw new InvalidArgumentException;
         }
 
         return $map->merge(
