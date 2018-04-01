@@ -1,0 +1,12 @@
+prototype<string>:
+    type: string
+    alias: '?string'
+    repository: '?string'
+    factory: '?string'
+    labels: set<string>
+    identity:
+        property: string
+        type: string
+    properties:
+        prototype<string>:
+            type: string
