@@ -57,10 +57,7 @@ final class Map implements Structure
             try {
                 $propertiesMap = $propertiesMap->put(
                     $key,
-                    $properties->build(
-                        Str::of($value),
-                        $properties
-                    )
+                    $properties->build(Str::of($value))
                 );
             } catch (SchemaNotParseable $e) {
                 throw new SchemaNotParseable($key, 0, $e);
