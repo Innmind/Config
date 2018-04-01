@@ -37,7 +37,8 @@ class PropertiesTest extends TestCase
                 Property\Primitive::class,
                 Property\Set::class,
                 Property\Stream::class,
-                Property\Sequence::class
+                Property\Sequence::class,
+                Property\Mixed::class
             ))
         );
         $this->assertSame($defaults, Properties::defaults());
