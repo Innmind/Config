@@ -11,6 +11,7 @@ use Innmind\Config\{
     Property,
     Exception\SchemaNotParseable,
 };
+use Symfony\Component\Yaml\Yaml;
 use PHPUnit\Framework\TestCase;
 
 class ConfigTest extends TestCase
@@ -38,5 +39,12 @@ class ConfigTest extends TestCase
         $this->expectException(SchemaNotParseable::class);
 
         $config->build(['foo' => 'int']);
+    }
+
+    public function testBuild()
+    {
+        $structure = (new Config)->build(Yaml::parseFile('schema.yml'));
+
+        $this->assertInstanceOf(Structure\Prototype::class, $structure);
     }
 }
