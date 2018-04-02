@@ -68,6 +68,8 @@ The full list of values formats you can use:
 * `stream<{type}>+` where `type` is any value accepted by `Innmind\Immutable\Stream` and must at least have one value
 * `sequence`
 * `sequence+` must have at least one value
+* `enum({typeA|typeB})` possible values separated by a `|`
+* `?enum({typeA|typeB})` possible values separated by a `|` but the value is optional
 
 ## Extend behaviour
 
