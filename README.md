@@ -61,13 +61,15 @@ The full list of keys formats you can use:
 
 The full list of values formats you can use:
 
-* any value having a `is_{type}` function, this includes `int`, `float`, `bool`, `string`, `scalar`, `array`, `object` and `resource`
+* any value having a `is_{type}` function, this includes `int`, `float`, `bool`, `string`, `scalar`, `array`, `object` and `resource`, can be declared optional by prefixing with a `?`
 * `set<{type}>` where `type` is any value accepted by `Innmind\Immutable\Set`
 * `set<{type}>+` where `type` is any value accepted by `Innmind\Immutable\Set` and must at least have one value
 * `stream<{type}>` where `type` is any value accepted by `Innmind\Immutable\Stream`
 * `stream<{type}>+` where `type` is any value accepted by `Innmind\Immutable\Stream` and must at least have one value
 * `sequence`
 * `sequence+` must have at least one value
+* `enum({typeA|typeB})` possible values separated by a `|`
+* `?enum({typeA|typeB})` possible values separated by a `|` but the value is optional
 
 ## Extend behaviour
 
