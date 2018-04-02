@@ -61,7 +61,8 @@ final class Properties
             Property\Set::class,
             Property\Stream::class,
             Property\Sequence::class,
-            Property\Mixed::class
+            Property\Mixed::class,
+            Property\Enum::class
         );
     }
 }
